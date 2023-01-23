@@ -1,0 +1,29 @@
+.form-container {
+    text-align: center;
+}
+
+input[type="text"] {
+    width: 150px;
+    height: 25px;
+    padding-left: 15px;
+    margin:5px;
+}
+
+select {
+    height: 30px;
+    padding-left: 40px;
+    margin:5px;
+}
+
+input[type="button"],
+input[type="submit"] {
+    height: 25px;
+    margin-left: 5px;
+}
+
+.add-employee-btn {
+    float: right;
+    margin-bottom: 5px ;
+}
+
+
