@@ -1,10 +1,11 @@
 import "../style/EmployeeForm.style.css"
-import React, {useState} from "react";
-import {IEmployee} from "../models/Employee.type";
+import React, {useEffect, useState} from "react";
+import {IEmployee} from "../modal/Employee.type";
 import {Button, Col, Row} from "react-bootstrap";
-import useInput from "../hooks/use-input";
+import useInput from "../../../hooks/use-input";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import {ILocation} from "../../location/modal/ILocation";
 
 type Props = {
     onBackBtnClickHandler : () => void;
@@ -80,6 +81,17 @@ const AddEmployee = (props: Props) => {
         }
         onSubmitClickHandler(data);
     };
+    const [locations, setLocations] = useState([])
+    useEffect(() => {
+        fetch("http://localhost:8080/location")
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                console.log("location : "+data)
+                setLocations(data);
+            })
+    },[])
 
     return(<>
             <center>
@@ -89,15 +101,18 @@ const AddEmployee = (props: Props) => {
                         <label >Employee Name</label>
                         <input className={employeeNameInputClass} placeholder="Employee Name" value={employeeName} onChange={employeeChangeHandler} onBlur={employeeBlurHandler} />
                         {employeeNameHasError && <p className="text-danger">{employeeNameErrorMessage}</p>}
-
                     </div>
                     <div className="form-group col-md-6 mt-3">
                         <label htmlFor="inputState">Employee Location</label>
                         <select className={employeeLocationInputClass} value={employeeLocationId} onChange={locationChangeHandler} onBlur={locationBlurHandler}>
                             <option value={0}>Select Location</option>
-                            <option value={1}>Gurugram</option>
-                            <option value={2}>Pune</option>
-                            <option value={3}>Bangalore</option>
+                            {locations.map((location:ILocation) => {
+                                return(
+                                    <React.Fragment>
+                                        <option value={location.locationId}>{location.locationName}</option>
+                                    </React.Fragment>
+                                );}
+                            )}
                         </select>
                         {employeeLocationHasError && <p className="text-danger">Select employee location.</p>}
                     </div>

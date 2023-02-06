@@ -1,5 +1,6 @@
-import {IDepartment} from "./Department.type";
-import {ILocation} from "./ILocation";
+import {ILocation} from "../../location/modal/ILocation";
+import {IDepartment} from "../../department/modal/Department.type";
+
 
 export interface IEmployee {
     employeeId?: number | string;

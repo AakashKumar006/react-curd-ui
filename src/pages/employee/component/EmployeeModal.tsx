@@ -1,5 +1,6 @@
 import "../style/EmployeeModal.style.css"
-import {IEmployee} from "../models/Employee.type";
+import {IEmployee} from "../modal/Employee.type";
+import React, { Component }  from 'react';
 
 type Props = {
     onClose: () => void
@@ -15,7 +16,7 @@ const EmployeeModal= (props:Props) => {
             </div>
             <div className="modal-body">
                 <div>
-                    <label>Employee Id :  {data.employeeId}</label>
+                    <label>Employee Id :  {data.employeeId}</label>6
                 </div>
                 <div>
                     <label>Employee Name :  {data.employeeName}</label>

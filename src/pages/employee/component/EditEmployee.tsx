@@ -1,4 +1,4 @@
-import {IEmployee} from "../models/Employee.type";
+import {IEmployee} from "../modal/Employee.type";
 import React, {useState} from "react";
 import {Button, Col, Row} from "react-bootstrap";
 

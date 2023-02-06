@@ -1,19 +1,21 @@
 import "../style/Home.style.css";
-import EmployeeList from "./EmployeeList";
 import React, {useState} from "react";
-import AddEmployee from "./AddEmployee";
-import {IEmployee, pageEnum} from "../models/Employee.type";
-import EditEmployee from "./EditEmployee";
-import EmployeeModal from "./EmployeeModal";
+import {IEmployee, pageEnum} from "../pages/employee/modal/Employee.type";
+import '../style/Home.style.css'
+import EmployeeList from "../pages/employee/component/EmployeeList";
+import AddEmployee from "../pages/employee/component/AddEmployee";
+import EmployeeModal from "../pages/employee/component/EmployeeModal";
+import EditEmployee from "../pages/employee/component/EditEmployee";
 
 const Home = () => {
     const [shownPage, setShowPAge] = useState(pageEnum.list);
     const [editEmployeeData, setEditEmployeeData] = useState({});
     const [employeeData, setEmployeeData] = useState(null as IEmployee | null);
     const [showModal, setShowModal] = useState(false);
+
     const onAddEmployeeClickHandler = () => {
         setShowPAge(pageEnum.add);
-    }
+    };
     const changeModalState = (data:IEmployee) => {
         setShowModal(true);
         setEmployeeData(data);
@@ -21,15 +23,17 @@ const Home = () => {
 
     const onCloseModal = () => {
         setShowModal(false);
-    }
+    };
+
     const showListPage = () => {
         setShowPAge(pageEnum.list)
-    }
+    };
 
     const viewEmployeeEdit = (data: IEmployee) => {
         setShowPAge(pageEnum.edit);
         setEditEmployeeData(data);
-    }
+    };
+
     const updateEmployee = (data: IEmployee) => {
         fetch('http://localhost:8080/employee/update',{
             method: 'PUT',
@@ -53,14 +57,10 @@ const Home = () => {
             .then(response => {
                 console.log(response);
             })
-    }
+    };
+
     return (
         <>
-            <article className="article-header">
-                <header>
-                    <h1>Employee Management System</h1>
-                </header>
-            </article>
             <section className="section-content">
                 {shownPage === pageEnum.list && (<>
                         <button type="button" value="ADD NEW EMPLOYEE" onClick={onAddEmployeeClickHandler} className="btn btn-warning float-end">ADD EMPLOYEE</button>
@@ -74,6 +74,8 @@ const Home = () => {
                 )}
                 {shownPage === pageEnum.edit && (<EditEmployee data={editEmployeeData}  onSubmitEditForm={(employee:IEmployee)=>updateEmployee(employee)} onBackBtnClickHandler={showListPage}/>)}
             </section>
+
+
         </>
     )};
 

@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from "react";
-import {IEmployee, pageEnum} from "../models/Employee.type";
+import {IEmployee, pageEnum} from "../modal/Employee.type";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import {Button, Col, Row} from "react-bootstrap";
-
-
 import Moment from "moment";
 
 type Props = {
@@ -34,7 +32,7 @@ const EmployeeList = (props:Props) => {
             .then(data => {
                 setEmployees(data);
             })
-    })
+    },[])
     return (
         <div>
             <article><h3 className="list-header">LIST OF EMPLOYEES</h3></article>
@@ -50,7 +48,6 @@ const EmployeeList = (props:Props) => {
                 </tr>
                 </thead>
                 <tbody>
-
                 {employees.map((employee:IEmployee) => {
                     return(
                         <tr key={employee.employeeId}>
